@@ -1,3 +1,4 @@
 FROM golang
 
-RUN go run example/hello.go
+COPY example /
+RUN go run /example/hello.go
