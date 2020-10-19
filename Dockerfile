@@ -1,5 +1,5 @@
 FROM golang
 
-COPY . /
-RUN pwd
-RUN go run example/hello.go
+COPY . /go
+
+RUN go run /go/example/hello.go
