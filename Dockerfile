@@ -14,9 +14,10 @@ ADD https://github.com/gruntwork-io/terragrunt/releases/download/v0.25.4/terragr
 RUN chmod +x /usr/local/bin/terragrunt
 
 # Proxmox Module Install
+RUN export OS=linux
+RUN export ARCH=amd64
 RUN GO111MODULE=on go get -v github.com/Telmate/terraform-provider-proxmox/cmd/terraform-provider-proxmox
 RUN GO111MODULE=on go get -v github.com/Telmate/terraform-provider-proxmox/cmd/terraform-provisioner-proxmox
-RUN GO111MODULE=on go install -v github.com/Telmate/terraform-provider-proxmox/cmd/terraform-provider-proxmox
-RUN GO111MODULE=on go install -v github.com/Telmate/terraform-provider-proxmox/cmd/terraform-provisioner-proxmox
-RUN cp $GOPATH/bin/terraform-provider-proxmox /usr/local/bin/
-RUN cp $GOPATH/bin/terraform-provisioner-proxmox /usr/local/bin/
+RUN mkdir -p ~/.terraform.d/plugins/${OS}_${ARCH}/
+RUN ln -s ~/go/bin/terraform-provider-proxmox    ~/.terraform.d/plugins/${OS}_${ARCH}/
+RUN ln -s ~/go/bin/terraform-provisioner-proxmox ~/.terraform.d/plugins/${OS}_${ARCH}/
