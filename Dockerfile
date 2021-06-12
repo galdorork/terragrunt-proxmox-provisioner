@@ -1,12 +1,11 @@
-FROM golang
+FROM ubuntu
 
 #Install Deps
 RUN apt update
-RUN apt install -y jq unzip
+RUN apt install -y jq unzip wget
 
 #Install Terraform
 RUN wget https://releases.hashicorp.com/terraform/1.0.0/terraform_1.0.0_linux_amd64.zip
-RUN chmod +x /usr/local/bin/terraform
 RUN unzip terraform_1.0.0_linux_amd64.zip -d /usr/local/bin/
 RUN chmod +x /usr/local/bin/terraform
 
